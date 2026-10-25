@@ -47,14 +47,14 @@ ln/
 **1. Clone project repository of your choice and navigate to project folder**
 ```bash
 cd <path/to/directory>
-git clone https://github.com/egistific/imc_ln.git
-cd imc_ln
+git clone https://github.com/egistific/imc_bc.git
+cd imc_bc
 ```
 
 **2. Create and activate conda environment**
 ```bash
 conda env create -f environment.yaml
-conda activate imc-ln
+conda activate imc
 ```
 
 **3. Obtain Steinbock Docker image**
