@@ -1,0 +1,126 @@
+project:
+  name: "melanoma"
+  root_dir: "/media/meiying/ExtremePro/ln"
+  seed: 42
+
+data:
+  raw_dir: "raw"
+  metadata_dir: "metadata"
+  steinbock_dir: "steinbock"
+  patient_file: "Patient_metadata.csv"
+  compensation_file: "Spillover_matrix.csv"
+
+panel:
+  original: "panel_org.csv"
+  edited: "panel_edited.csv"
+
+channels:
+  discard:
+    - ArAr80
+    - Y89
+    - Cd111
+    - In115
+    - Xe131
+    - Xe134
+    - Ba138
+    - Hg200
+    - Hg202
+    - Pb204
+    - Pb206
+  nuclear:
+    - In113
+    - In115
+    - Ir191
+    - Ir193
+  membrane_or_cytoplasm:
+    - Pr141
+    - Nd144
+    - Sm147
+    - Sm149
+    - Gd160
+    - Dy162
+    - Er167
+    - Yb174
+    - Lu175
+
+preprocessing:
+  hot_pixel_filter: 50
+  img_dir: "img"
+  img_metadata: "images_info.csv"
+
+cell_segmentation:
+  method: "deepcell"
+  app: "mesmer"
+  minmax: true
+  masks_dir: "masks_deepcell"
+
+img_with_masks_dir: "img_with_masks"
+
+measure_intensities:
+  intensities_dir: "intensities"
+
+measure_regionprops:
+  regionprops_dir: "regionprops"
+
+measure_neighbors:
+  neighbors_dir: "neighbors"
+  expansion: "expansion"
+  dmax: 4
+
+combine_intensities_and_regionprops:
+  output_dir: "combined"
+  output_file: "combined_single_cell.csv"
+
+
+analysis:
+  output_dir: "analysis"
+  rds_file: "steinbock_single_cell_data.rds"
+  rds_file_compensated: "steinbock_single_cell_data_compensated.rds"
+  rds_file_filtered: "steinbock_single_cell_data_filtered.rds"
+  compensation_method: "nnls"
+  keep_tissue_types:
+    - "primary tumor"
+    - "lymph node mts"
+  som:
+    nodes: 100
+    rlen: 10
+    max_k: 30
+    k: 20
+    reps: 100
+    distance: "euclidean"
+  num_neighbors: 6
+  arcsinh_cofactor: 1
+  dna1_cutoff: 1.2
+  extract_cellid_from: "Object"
+  extract_coords_from:
+    - centroid-1
+    - centroid-0
+  extract_imagemetadata_from:
+    - image
+    - width_px
+    - height_px
+  extract_names_from: "name"
+  return_as: "spe"
+  
+  plots:
+    figures_dir: "figures"
+    cells_per_type_heatmap: 2000   # cells sampled per cell type for the single-cell heatmap
+    min_cells_image: 100           # images with fewer cells are left out of per-image proportions
+
+  astir:
+    exprs_file: "astir_exprs.csv"
+    design_file: "astir_design.csv"
+    markers_yaml: "stage1_astir_markers.yaml"
+    celltypes_file: "astir_celltypes.csv"
+    batch_col: "ArrayNr"
+    winsor_quantile: 0.999
+    max_epochs: 100
+    batch_size: 1024
+    learning_rate: 0.0001
+    num_init: 5
+    num_init_epochs: 5
+    delta_loss: 0.001
+    threshold: 0.7
+    batch_correction: null
+
+

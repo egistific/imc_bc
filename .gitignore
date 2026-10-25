@@ -1,0 +1,14 @@
+# Ignore everything in this folder ...
+/*
+
+# ... except these files
+!/.gitignore
+!/config.yaml
+!/environment.yaml
+!/snakefile
+!/README.md
+
+# ... and these folders (raw/, img/, img_with_masks/ and analysis/ are too large for git)
+!/scripts/
+!/metadata/
+!/steinbock/

@@ -1,0 +1,7 @@
+cell_types:
+  Epithelial:  [panCK, CK8_18, CK7, Ecad]
+  Stromal:     [Vimentin, Fibronectin, SMA]
+  Endothelial: [vWF]
+  T cell:      [CD45, CD3]
+  B cell:      [CD45, CD20]
+  Myeloid:     [CD45, CD68, CD11c, HLADR]
